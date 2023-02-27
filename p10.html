@@ -1,0 +1,325 @@
+<!-- 10. Create a student's data array, display itchange student data on button click and it'll be show updated data -->
+<html>
+    <head>
+        <title>Task-10</title>
+    </head>
+
+    <body>          
+
+        Enter ID Of Student:- <input type="text" id="id" readonly><br><br>
+        Enter Name Of Student:- <input type="text" id="name"><br><br>
+        Enter Hobby Student:- <input type="text" id="hobby"><br><br>
+        Enter STD Of Student:- <input type="number" id="std"><br><br>        
+
+        <button onclick="updateData()">Update Data</button>
+        <button onclick="addData()">ADD Data</button>
+
+        <br><br>
+        <hr>
+
+        <script>
+
+            if(localStorage.getItem("StudentData")==null){
+                localStorage.setItem("StudentData",JSON.stringify([]))
+            }
+            
+            // let student = [
+            //     {
+            //         id:1,
+            //         name:"Hit",
+            //         hobby : "Reading",
+            //         std : 10
+            //     },
+            //     {
+            //         id:2,
+            //         name:"Hit",
+            //         hobby : "Cricket",
+            //         std : 8
+            //     },
+            //     {
+            //         id:3,
+            //         name:"xyz",
+            //         hobby : "Football",
+            //         std : 1
+            //     },
+            //     {
+            //         id:4,
+            //         name:"Aditya",
+            //         hobby : "Hockey",
+            //         std : 12
+            //     },
+            //     {
+            //         id:5,
+            //         name:"Manan",
+            //         hobby : "Yoga",
+            //         std : 9
+            //     }
+            // ]
+        </script>
+
+        <script src="p10."></script>
+<!-- 
+        <script type="module">
+            import {student} from './p10.js'
+        </script> -->
+
+        <script>
+            function createTable(){
+
+                let student  = JSON.parse(localStorage.getItem("StudentData"));
+
+
+                var table = document.createElement("table");
+                table.setAttribute("id","custom-table");
+                table.width = '50%';
+
+                let tr = document.createElement("tr");
+                table.appendChild(tr);
+                tr.text
+
+                let td1 = document.createElement("td");
+                let id = document.createTextNode("ID");
+                td1.appendChild(id);
+                tr.appendChild(td1);
+
+                let td2 = document.createElement("td");
+                let name = document.createTextNode("name");
+                td2.appendChild(name);
+                tr.appendChild(td2);
+
+                let td3 = document.createElement("td");
+                let hobby = document.createTextNode("hobby");
+                td3.appendChild(hobby);
+                tr.appendChild(td3);
+
+                let td4 = document.createElement("td");
+                let std = document.createTextNode("std");
+                td4.appendChild(std);
+                tr.appendChild(td4);
+
+                let td5 = document.createElement("td");
+                let updateEvent = document.createTextNode("Update Event");
+                td5.appendChild(updateEvent);
+                tr.appendChild(td5);
+
+                let td6 = document.createElement("td");
+                let deleteEvent = document.createTextNode("Delete Event");
+                td6.appendChild(deleteEvent);
+                tr.appendChild(td6);
+
+                for(i=0;i<student.length;i++){
+                    console.log(student[i]);
+
+                    let tr = document.createElement("tr");
+                    table.appendChild(tr);
+
+                    let td1 = document.createElement("td");
+                    td1.style.padding = "10px 10px";
+                    table.style.textAlign = "center";
+                    let id = document.createTextNode(student[i].id+1);
+                    td1.appendChild(id);
+                    tr.appendChild(td1);
+
+                    let td2 = document.createElement("td");
+                    let name = document.createTextNode(student[i].name);
+                    td2.appendChild(name);
+                    tr.appendChild(td2);
+
+                    let td3 = document.createElement("td");
+                    let hobby = document.createTextNode(student[i].hobby);
+                    td3.appendChild(hobby);
+                    tr.appendChild(td3);
+
+                    let td4 = document.createElement("td");
+                    let std = document.createTextNode(student[i].std);
+                    td4.appendChild(std);
+                    tr.appendChild(td4);
+
+                    let td5 = document.createElement("td");
+                    let button = document.createElement("button");
+                    button.style.backgroundColor = "#87CEEB"
+                    button.style.padding = "5px 15px";
+                    button.style.borderRadius = "10px"
+
+                    button.appendChild(document.createTextNode("Update"));
+
+                    td5.appendChild(button);
+
+                    button.onclick=function(){
+                        console.log(update(this));
+                    }
+                    
+                    tr.appendChild(td5);                    
+
+                    let td6 = document.createElement("td");
+                    let button2 = document.createElement("button");
+                    button2.style.backgroundColor = "red"
+                    button2.style.padding = "5px 15px";
+                    button2.style.borderRadius = "10px"
+
+                    button2.appendChild(document.createTextNode("Delete"));
+
+                    td6.appendChild(button2);
+                    tr.appendChild(td6);       
+                    
+                    button2.onclick=function(){
+                        console.log(deleteData(this));
+                    }
+                }
+
+                document.body.appendChild(table);
+                table.setAttribute("border",1);
+
+            }
+        </script>
+
+        <script>
+            function update(element){
+                
+                let id = getId(element)-1;
+
+                var data = getData(data)
+
+                document.getElementById("id").value = data[id].id+1;
+                document.getElementById("name").value = data[id].name;
+                document.getElementById("hobby").value = data[id].hobby;
+                document.getElementById("std").value = data[id].std;
+            }
+        </script>
+
+            <script>
+                function getId(element){
+                    let id = element.parentNode.parentNode.rowIndex;
+                    console.log(id);
+                    return id;
+                }
+            </script>
+
+
+        <script>
+            createTable();
+        </script>
+
+        <script>
+            function updateData(){
+
+                var data = getData()
+
+                let id = document.getElementById("id").value - 1;
+                let name = document.getElementById("name").value ;
+                let hobby = document.getElementById("hobby").value ;
+                let std = document.getElementById("std").value ;
+
+                if(id!=-1){
+                    data[id].name = name;
+                    data[id].hobby = hobby;
+                    data[id].std = parseInt(std);
+                    setData(data)
+                }else{
+                    alert("Please Select Update Data");
+                }
+
+                var t = validation(std);
+                if(t){
+                    cleanTable()
+                    cleanData()
+                }
+
+            }
+        </script>
+
+        <script>
+            function addData(){
+                
+                var data = getData()
+                var index = 0;
+
+                if(localStorage.getItem("StudentData")!=null){
+                    index = data.length;
+                }
+                
+                let name = document.getElementById("name").value ;
+                let hobby = document.getElementById("hobby").value ;
+                let std = document.getElementById("std").value ;
+
+                if(name!="" && hobby!="" && std!=""){
+                    data.push({
+                        id: index, 
+                        name : name , 
+                        hobby : hobby , 
+                        std : std
+                    })
+                }else{
+                    alert("Please fill all data")
+                }
+
+                setData(data);
+
+                var t = validation(std);
+                if(t){
+                    cleanTable()
+                    cleanData()
+                }
+                
+            }
+        </script>
+
+        <script>
+            function deleteData(element){
+
+                let id = getId(element)-1;         
+                var data = getData()
+                
+                data.splice(id,1)
+
+                data.forEach( (element,index) => {
+                    element.id = index
+                    console.log(element.id)
+                })
+
+                setData(data);
+
+                cleanTable()
+
+            }
+        </script>
+
+        <script>
+            function cleanData(){
+                document.getElementById("id").value = "";
+                document.getElementById("name").value = "";
+                document.getElementById("hobby").value = "";
+                document.getElementById("std").value = "";
+            }
+
+            function cleanTable(){
+                document.getElementById("custom-table").remove()
+                createTable();  
+            }
+
+            function getData(){
+                var data = JSON.parse(localStorage.getItem("StudentData"));
+                return data;
+            }
+
+            function setData(data){
+                localStorage.setItem("StudentData",JSON.stringify(data));
+            }
+
+            function validation(std){
+
+                let reg = /^[0-9]+$/;
+
+                if(!reg.test(std)){
+                    alert('STD not valid');
+                    return false;
+                }else{
+                    return true;
+                }
+
+
+            }
+        </script>
+
+    </body>
+</html>

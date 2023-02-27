@@ -1,0 +1,40 @@
+<!-- 8. input number_of_rows and number_of_columns and generate table -->
+
+<html>
+    <head>
+        <title>
+            task-8
+        </title>
+
+    </head>
+
+    <body>
+
+        <script>
+                        
+            var row_no  = prompt("Enter Row:- ",5);
+            var col_no = prompt("Enter Column:- ",5);            
+            
+            const table = document.createElement("table");
+  
+            for (let i = 0; i < row_no; i++) {
+                
+                var row = document.createElement("tr");
+
+                for (let j = 0; j < col_no; j++) {
+                
+                var cell = document.createElement("td");
+                var cellText = document.createTextNode(`row- ${i+1} \n col-${j+1}`);
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+                }
+
+                table.appendChild(row);
+            }
+
+            document.body.appendChild(table);           
+            table.setAttribute("border",1)  
+
+        </script>
+    </body>
+</html>

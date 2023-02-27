@@ -1,0 +1,28 @@
+<!-- 9. draw rectangle and circle on canvas -->
+
+<html>
+    <head>
+        <title>Task p9</title>
+    </head>
+<body>
+  <canvas id="canvas">
+
+  </canvas>
+  <script>
+
+    let canvas = document.getElementById("canvas");
+    let context = canvas.getContext("2d");
+
+    context.arc(145, 75, 50, 0, 2*Math.PI);
+    context.strokeStyle = 'black';
+    context.stroke();
+
+    var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+    ctx.beginPath();
+    ctx.rect(5, 5, 290, 140);
+    ctx.stroke();
+
+  </script>
+</body>
+</html>
